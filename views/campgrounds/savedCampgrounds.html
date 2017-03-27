@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+<div class="container">
+     
+     <header class="text-center">
+          <h1>All campgrounds you loved</h1>
+     </header>
+     
+     <div class="row" style="display:flex; flex-wrap:wrap;">
+          <% user.campgrounds.forEach(function(camp){ %>
+               <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                         <img src="<%= camp.image %>">
+                         <div class="caption">
+                              <form action="/camps/<%= user._id %>/savedCampground/<%= camp._id %>?_method=PUT" method="POST">
+                                   <input class="btn btn-danger pull-right btn-xs" type="submit" value="Remove"/>
+                              </form>
+                              <h4><a href="/camps/<%= camp._id %>" style="text-decoration: none"> <%= camp.name %> </a></h4>
+                              <p><%= camp.description.substring(0, 100) %>...</p>
+                         </div>
+                    </div> 
+               </div>
+          <% }); %>
+     </div>
+    
+
+</div>
+
+
+
+<% include ../partials/footer %>
+

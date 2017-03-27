@@ -5,6 +5,7 @@ var campSchema = ({
     image: String,
     price: String,
     description: String,
+    guestImg:Array,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

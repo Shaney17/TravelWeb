@@ -13,14 +13,20 @@ var indexRoutes     = require("./routes/index.js"),
     campsRoutes     = require("./routes/camps.js"),
     commentsRoutes  = require("./routes/comments.js");
 
-//DATABASE    
-// mongoose.connect("mongodb://localhost/yelp_camp_v10");
+//DATABASE connect    
+//mongoose.connect("mongodb://localhost/yelp_camp_v10");
 mongoose.connect("mongodb://shaney:meo121317@ds139470.mlab.com:39470/yelpcamp17");
 
-
+//body-parser MW
 app.use(bodyParser.urlencoded({extended: true}));
+
+//set view engine
 app.set("view engine", "ejs");
+app.engine("html", require("ejs").renderFile);
+
+//set static folder
 app.use(express.static(__dirname + "/public"));
+
 app.use(methodOverride("_method"));
 app.use(flash());
 
@@ -49,7 +55,7 @@ app.use(function(req, res, next){
 //All routers
 app.use("/", indexRoutes);
 app.use("/camps", campsRoutes);
-app.use("/camps/:id/comments", commentsRoutes);
+app.use("/camps/:id", commentsRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){

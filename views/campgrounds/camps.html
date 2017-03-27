@@ -7,6 +7,9 @@
                 <h1>Welcome to the YelpCamp</h1>
                 <p>View our hand-picked campgrounds from all over the world</p>
                <a class="btn btn-primary btn-large" href="/camps/new">Add a new Campland</a>
+               <% if(currentUser) { %>
+                    <a class="btn btn-danger btn-large" href="/camps/<%= currentUser._id %>/savedCampground">All campground you loved</a>
+               <% } %>
           </div>
      </header>
      
@@ -15,16 +18,22 @@
                <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                          <img src="<%= camp.image %>">
-                         <div class="caption text-center">
+                         <div class="caption">
+                              <form action="/camps/<%= camp._id %>/saveCampground" method="POST">
+                                   <input class="pull-right" type="image" src="http://www.hbc333.com/data/out/108/47390056-heart-image.png" style="width:10%; height:10%;"/>
+                              </form>
                               <h4><a href="/camps/<%= camp._id %>" style="text-decoration: none"> <%= camp.name %> </a></h4>
+                              <p><%= camp.description.substring(0, 100) %>...</p>
                          </div>
                     </div> 
                </div>
           <% }); %>
      </div>
-     
+    
 
 </div>
+
+
 
 <% include ../partials/footer %>
 
